@@ -1,0 +1,122 @@
+.navbar {
+  background-color: #fdfdfd;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-left: 100px;
+}
+
+.logo img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.logo p {
+  color: var(--primary-color);
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+.elements {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.homeElement {
+  margin: 0 20px;
+}
+
+.homeElement {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.homeIcons {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-right: 100px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.userIcon {
+  margin: 0 10px;
+}
+
+.homeIcon,
+.settingIcon,
+.notificationIcon {
+  margin-right: 10px;
+  font-size: 20px !important;
+}
+
+.logoutIcon {
+  margin-top: 7px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.homeElement a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.login,
+.signup,
+.logout {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0px 8px;
+  margin: 0 10px 0 0;
+}
+
+.login {
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.signup {
+  padding-right: 6px;
+}
+
+.loginIcon {
+  margin-right: 10px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 16px;
+}
+
+.user-info span {
+  margin-right: 10px;
+}
+
+.close {
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
