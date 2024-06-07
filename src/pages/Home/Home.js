@@ -4,7 +4,7 @@ import projectImage from "../../assets/Home-img.png";
 import CreateProjectButton from "../../components/Buttons/CreateProject/createProject";
 import { MdAddCircle } from "react-icons/md";
 import CreateProject from "../../components/Modals/CreateProject/CreateProject";
-import { createProject } from "../../utility/createProject "; // Import the utility function
+import { createProject } from "../../utility/createProject "; 
 import { useNavigate } from "react-router-dom";
 
 const Home = ({ user }) => {

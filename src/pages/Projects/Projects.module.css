@@ -1,0 +1,46 @@
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.projectsContainer {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.headerContainer h1 {
+  color: var(--primary-color);
+  font-size: 48px;
+  font-weight: 700;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.headerContainer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.plusIcon {
+  font-size: 20px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
