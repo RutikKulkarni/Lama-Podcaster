@@ -10,6 +10,7 @@ import Home from "./pages/Home/Home";
 import LoginModal from "./components/Modals/Login/Login";
 import SignupModal from "./components/Modals/Signup/Signup";
 import Projects from "./pages/Projects/Projects";
+import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -83,6 +84,12 @@ const App = () => {
         <Route
           path="/projects"
           element={<ProjectsRoute element={<Projects user={loggedInUser} />} />}
+        />
+        <Route
+          path="/projects/:projectName"
+          element={
+            <ProjectsRoute element={<ProjectDetails user={loggedInUser} />} />
+          }
         />
       </Routes>
 

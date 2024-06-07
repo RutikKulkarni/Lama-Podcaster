@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #fdfdfd;
+  background-color: var(--tertiary-color);
   padding: 10px;
   display: flex;
   justify-content: space-between;

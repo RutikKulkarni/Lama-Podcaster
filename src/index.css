@@ -15,4 +15,5 @@ code {
 :root {
   --primary-color: rgba(126, 34, 206, 1);
   --secondary-color: rgba(33, 25, 53, 1);
+  --tertiary-color: rgba(243, 232, 255, 1);
 }

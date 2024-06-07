@@ -30,6 +30,10 @@ const Projects = ({ user }) => {
     setShowCreateProjectModal(false);
   };
 
+  const handleProjectClick = (projectName) => {
+    navigate(`/projects/${projectName}`);
+  };
+
   return (
     <div className={styles.projectsContainer}>
       <div className={styles.headerContainer}>
@@ -43,12 +47,13 @@ const Projects = ({ user }) => {
       ) : (
         <div className={styles.projectsGrid}>
           {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              projectName={project.name}
-              episodeName={project.episodeName}
-              creationTime={project.creationTime}
-            />
+            <div key={index} onClick={() => handleProjectClick(project.name)}>
+              <ProjectCard
+                projectName={project.name}
+                episodeName={project.episodeName}
+                creationTime={project.creationTime}
+              />
+            </div>
           ))}
         </div>
       )}
