@@ -34,6 +34,7 @@ const Home = ({ user }) => {
     <div className={styles.container}>
       <h1 className={styles.title}>Create the project</h1>
       <img src={projectImage} alt="Project Image" className={styles.image} />
+      <p className={styles.info}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       <CreateProjectButton
         className={styles.button}
         onClick={handleCreateUserClick}

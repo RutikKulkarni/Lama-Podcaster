@@ -11,9 +11,22 @@ function CreateProject({ onClose, user, onCreate }) {
       setErrorMessage("Project Name is required.");
       return;
     }
+
+    if (projectName.length > 20) {
+      setErrorMessage("Project Name cannot be more than 20 characters.");
+      return;
+    }
+
     onCreate(projectName);
     if (onClose) {
       onClose();
+    }
+  };
+
+  const handleChange = (e) => {
+    setProjectName(e.target.value);
+    if (e.target.value.length <= 20) {
+      setErrorMessage("");
     }
   };
 
@@ -28,7 +41,7 @@ function CreateProject({ onClose, user, onCreate }) {
           className={styles.input}
           placeholder="Project Name"
           value={projectName}
-          onChange={(e) => setProjectName(e.target.value)}
+          onChange={handleChange}
           required
         />
       </div>
