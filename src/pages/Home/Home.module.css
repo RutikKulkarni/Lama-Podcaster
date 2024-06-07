@@ -17,6 +17,8 @@
   max-width: 600px;
   text-align: center;
   margin: 0 0 20px 0;
+  font-weight: 500;
+  color: rgb(109, 109, 109);
 }
 
 .image {
@@ -33,7 +35,7 @@
 
 .button {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   padding: 12px 24px;
   background-color: var(--secondary-color);
@@ -44,7 +46,6 @@
   font-size: 20px;
   line-height: 1;
 }
-
 
 .message {
   margin-top: 20px;
