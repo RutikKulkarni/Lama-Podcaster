@@ -11,11 +11,7 @@ function CreateProject({ onClose, user, onCreate }) {
       setErrorMessage("Project Name is required.");
       return;
     }
-
-    // Trigger the callback to handle project creation
     onCreate(projectName);
-
-    // Check if onClose exists before calling it
     if (onClose) {
       onClose();
     }

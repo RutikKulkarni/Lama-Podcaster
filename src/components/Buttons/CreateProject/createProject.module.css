@@ -6,7 +6,7 @@
 
 .button {
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
   padding: 12px 24px;
   background-color: var(--secondary-color);

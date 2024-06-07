@@ -1,11 +1,12 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { TbSmartHome } from "react-icons/tb";
 import { IoSettingsOutline } from "react-icons/io5";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { FiLogIn } from "react-icons/fi";
 import { FiLogOut } from "react-icons/fi";
+import { GoProjectRoadmap } from "react-icons/go";
 import styles from "./navbar.module.css";
 import logo from "../../assets/logo.png";
 
@@ -17,42 +18,45 @@ function Navbar({
 }) {
   return (
     <nav className={styles.navbar}>
-      <a href="/" className={styles.logo}>
+      <Link to="/" className={styles.logo}>
         <img src={logo} alt="Logo" />
         <p>LAMA.</p>
-      </a>
+      </Link>
       <div className={styles.elements}>
-        <p className={styles.homeElement}>
-          <a href="/" className={styles.homeElement}>
-            <TbSmartHome className={styles.homeIcon} />
-            Home
-          </a>
-          {loggedInUser ? (
-            <>
-              <p className={styles.userInfo}>
-                <AiOutlineUser className={styles.userIcon} />
-                <span>{loggedInUser}</span>
-              </p>
-              <button className={styles.logout} onClick={handleLogout}>
-                <FiLogOut className={styles.logoutIcon} />
-              </button>
-            </>
-          ) : (
-            <>
-              <button className={styles.login} onClick={openLoginModal}>
-                <FiLogIn className={styles.loginIcon} />
-                Login
-              </button>
-              <button className={styles.signup} onClick={openSignupModal}>
-                Signup
-              </button>
-            </>
-          )}
-          <p className={styles.homeIcons}>
-            <IoSettingsOutline className={styles.settingIcon} />
-            <IoMdNotificationsOutline className={styles.notificationIcon} />
-          </p>
-        </p>
+        <Link to="/" className={styles.homeElement}>
+          <TbSmartHome className={styles.homeIcon} />
+          Home
+        </Link>
+        {loggedInUser && (
+          <>
+            <Link to="/projects" className={styles.homeElement}>
+              <GoProjectRoadmap className={styles.homeIcon} />
+              Projects
+            </Link>
+            <div className={styles.userInfo}>
+              <AiOutlineUser className={styles.userIcon} />
+              <span>{loggedInUser}</span>
+            </div>
+            <button className={styles.logout} onClick={handleLogout}>
+              <FiLogOut className={styles.logoutIcon} />
+            </button>
+          </>
+        )}
+        {!loggedInUser && (
+          <>
+            <button className={styles.login} onClick={openLoginModal}>
+              <FiLogIn className={styles.loginIcon} />
+              Login
+            </button>
+            <button className={styles.signup} onClick={openSignupModal}>
+              Signup
+            </button>
+          </>
+        )}
+        <div className={styles.homeIcons}>
+          <IoSettingsOutline className={styles.settingIcon} />
+          <IoMdNotificationsOutline className={styles.notificationIcon} />
+        </div>
       </div>
     </nav>
   );

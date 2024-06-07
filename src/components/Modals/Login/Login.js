@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import styles from "./Login.module.css";
+import { loginUser } from "../../../utility/auth";
 
 function LoginModal({ onClose, onLogin }) {
   const [email, setEmail] = useState("");
@@ -13,8 +14,7 @@ function LoginModal({ onClose, onLogin }) {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find(user => user.email === email && user.password === password);
+    const user = loginUser(email, password);
 
     if (user) {
       onLogin(user.username);

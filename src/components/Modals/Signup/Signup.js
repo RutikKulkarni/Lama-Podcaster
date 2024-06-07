@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal";
 import styles from "./Signup.module.css";
-import { v4 as uuidv4 } from 'uuid'; // Import the UUID library
+import { signupUser } from "../../../utility/auth";
 
 function SignupModal({ onClose }) {
   const [username, setUsername] = useState("");
@@ -15,25 +15,14 @@ function SignupModal({ onClose }) {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const userExists = users.some(user => user.username === username || user.email === email);
+    const newUser = signupUser(username, email, password);
 
-    if (userExists) {
+    if (newUser) {
+      onClose();
+      window.alert("Signup successful!");
+    } else {
       setErrorMessage("Username or Email already exists.");
-      return;
     }
-
-    const newUser = {
-      id: uuidv4(),
-      username,
-      email,
-      password,
-    };
-
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-    onClose();
-    window.alert("Signup successful!");
   };
 
   return (

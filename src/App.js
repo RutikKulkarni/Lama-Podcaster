@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import LoginModal from "./components/Modals/Login/Login";
@@ -37,7 +42,7 @@ const App = () => {
   const handleLogin = (username) => {
     setLoggedInUser(username);
     localStorage.setItem("loggedInUser", username);
-    const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours
+    const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
     localStorage.setItem("expirationTime", expirationTime);
   };
 
@@ -58,9 +63,9 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Route guard to check if the user is logged in before accessing the projects page
   const ProjectsRoute = ({ element }) => {
-    return loggedInUser ? element : <Navigate to="/" replace />;
+    const user = localStorage.getItem("loggedInUser");
+    return user ? element : <Navigate to="/" replace />;
   };
 
   return (
@@ -75,7 +80,10 @@ const App = () => {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home user={loggedInUser} />} />
-        <Route path="/projects" element={<ProjectsRoute element={<Projects user={loggedInUser} />} />} />
+        <Route
+          path="/projects"
+          element={<ProjectsRoute element={<Projects user={loggedInUser} />} />}
+        />
       </Routes>
 
       {/* Modals */}

@@ -45,7 +45,11 @@ const Home = ({ user }) => {
         <p className={styles.message}>Please log in to create a project.</p>
       )}
       {showCreateProjectModal && (
-        <CreateProject onClose={handleCloseModal} user={user} onCreate={handleCreateProject} />
+        <CreateProject
+          onClose={handleCloseModal}
+          user={user}
+          onCreate={handleCreateProject}
+        />
       )}
     </div>
   );
