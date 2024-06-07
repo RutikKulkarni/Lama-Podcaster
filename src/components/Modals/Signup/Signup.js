@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import styles from "../Modals.module.css";
-import Card from "../../Card/Card";
+import Modal from "../Modal";
+import styles from "./Signup.module.css";
+import { v4 as uuidv4 } from 'uuid'; // Import the UUID library
 
 function SignupModal({ onClose }) {
   const [username, setUsername] = useState("");
@@ -9,71 +10,68 @@ function SignupModal({ onClose }) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSignup = () => {
-    // Retrieve existing user data from local storage
-    const userData = JSON.parse(localStorage.getItem("userData"));
-    // Check if username or email already exist
-    if (userData) {
-      if (userData.username === username) {
-        setErrorMessage("Username already exists.");
-        return;
-      }
-      if (userData.email === email) {
-        setErrorMessage("Email already exists.");
-        return;
-      }
+    if (!username || !email || !password) {
+      setErrorMessage("All fields are required.");
+      return;
     }
-    // Save new user data to local storage
-    localStorage.setItem(
-      "userData",
-      JSON.stringify({ username, email, password })
-    );
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const userExists = users.some(user => user.username === username || user.email === email);
+
+    if (userExists) {
+      setErrorMessage("Username or Email already exists.");
+      return;
+    }
+
+    const newUser = {
+      id: uuidv4(),
+      username,
+      email,
+      password,
+    };
+
+    users.push(newUser);
+    localStorage.setItem("users", JSON.stringify(users));
     onClose();
-    // Show signup success popup
     window.alert("Signup successful!");
   };
 
   return (
-    <div className={styles.modal}>
-      <Card>
-        <div className={styles.modalContent}>
-          <div className={styles.modalHeader}>
-            <h2>Sign Up</h2>
-            <span className={styles.close} onClick={onClose}>
-              &times;
-            </span>
-          </div>
-          <div className={styles.inputWrapper}>
-            <input
-              type="text"
-              className={styles.input}
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="email"
-              className={styles.input}
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              className={styles.input}
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
-          <button className={styles.modalbuttons} onClick={handleSignup}>
-            Sign Up
-          </button>
-        </div>
-      </Card>
-    </div>
+    <Modal onClose={onClose}>
+      <div className={styles.modalHeader}>
+        <h2>Sign Up</h2>
+      </div>
+      <div className={styles.inputWrapper}>
+        <input
+          type="text"
+          className={styles.input}
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          className={styles.input}
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          className={styles.input}
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </div>
+      {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+      <button className={styles.modalbuttons} onClick={handleSignup}>
+        Sign Up
+      </button>
+    </Modal>
   );
 }
 

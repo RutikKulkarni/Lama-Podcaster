@@ -1,0 +1,19 @@
+.plusIcon {
+  font-size: 24px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.button {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+}

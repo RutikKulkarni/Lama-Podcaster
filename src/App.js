@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import LoginModal from "./components/Modals/Login/Login";
 import SignupModal from "./components/Modals/Signup/Signup";
+import Projects from "./pages/Projects/Projects";
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -57,6 +58,11 @@ const App = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Route guard to check if the user is logged in before accessing the projects page
+  const ProjectsRoute = ({ element }) => {
+    return loggedInUser ? element : <Navigate to="/" replace />;
+  };
+
   return (
     <Router>
       <Navbar
@@ -69,6 +75,7 @@ const App = () => {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home user={loggedInUser} />} />
+        <Route path="/projects" element={<ProjectsRoute element={<Projects user={loggedInUser} />} />} />
       </Routes>
 
       {/* Modals */}
