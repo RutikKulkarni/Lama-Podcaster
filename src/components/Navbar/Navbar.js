@@ -54,7 +54,10 @@ function Navbar({
           </>
         )}
         <div className={styles.homeIcons}>
-          <IoSettingsOutline className={styles.settingIcon} />
+          <Link to="/Setting">
+              <IoSettingsOutline className={styles.settingIcon} />
+          </Link>
+
           <IoMdNotificationsOutline className={styles.notificationIcon} />
         </div>
       </div>

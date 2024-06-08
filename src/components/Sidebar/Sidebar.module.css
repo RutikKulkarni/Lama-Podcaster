@@ -69,3 +69,8 @@
 .sidebar li:last-child {
   border-bottom: none;
 }
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}

@@ -11,6 +11,8 @@ import LoginModal from "./components/Modals/Login/Login";
 import SignupModal from "./components/Modals/Signup/Signup";
 import Projects from "./pages/Projects/Projects";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
+import WeightConfiguration from "./pages/WeightConfiguration/WeightConfiguration";
+import Setting from "./pages/Setting/Setting";
 
 const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -91,6 +93,9 @@ const App = () => {
             <ProjectsRoute element={<ProjectDetails user={loggedInUser} />} />
           }
         />
+
+        <Route path="/WeightConfiguration" element={<WeightConfiguration />} />
+        <Route path="/Setting" element={<Setting />} />
       </Routes>
 
       {/* Modals */}
