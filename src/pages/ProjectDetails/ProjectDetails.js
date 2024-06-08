@@ -38,7 +38,22 @@ const ProjectDetails = ({ user }) => {
           <p>All files are processed! Your widget is ready to go!</p>
           <button className={styles.tryButton}>Try it out!</button>
         </div>
-        <p>Created: {new Date(project.creationTime).toLocaleString()}</p>
+
+        <div className={styles.tableContainer}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Upload Date & Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>{/* Insert table rows here */}</tbody>
+          </table>
+        </div>
+
+        {/* <p>Created: {new Date(project.creationTime).toLocaleString()}</p> */}
       </main>
     </div>
   );
