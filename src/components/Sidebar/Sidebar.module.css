@@ -1,0 +1,65 @@
+.sidebar {
+  width: 300px;
+  background-color: var(--tertiary-color);
+  padding: 20px;
+  height: 100vh;
+}
+
+.sidebar p {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 40px;
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 10px;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  margin-left: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar li.active {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+}
+
+.sidebar li.active .circle {
+  background-color: #444444;
+  color: #fff;
+}
+
+.circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #dbdbdb;
+  font-size: 12px;
+  margin-right: 10px;
+}
+
+.settingIcon {
+  font-size: 16px;
+}
+
+.circleforsetting {
+  margin-top: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #dbdbdb;
+  font-size: 12px;
+  margin-right: 10px;
+}
