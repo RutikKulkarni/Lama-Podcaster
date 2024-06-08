@@ -22,6 +22,43 @@
 }
 
 .title {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   color: var(--primary-color);
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.widgetBox {
+  height: 70px;
+  border-radius: 15px;
+  border: 0.72px solid #ccc;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-left: 40px;
+  padding-right: 50px;
+  background-color: var(--primary-color);
+}
+
+.tryButton {
+  padding: 10px 20px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.widgetBox p {
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
 }
