@@ -29,10 +29,11 @@
 .sidebar li.active {
   background-color: var(--primary-color);
   border-radius: 10px;
+  color: white;
 }
 
 .sidebar li.active .circle {
-  background-color: #444444;
+  background-color: #515151;
   color: #fff;
 }
 

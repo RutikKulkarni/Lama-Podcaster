@@ -1,0 +1,58 @@
+.title {
+  margin-bottom: 40px;
+  color: var(--primary-color);
+}
+
+.editContainer {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.textarea {
+  width: 90%;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.description {
+  margin-bottom: 10px;
+}
+
+.saveButton,
+.cancelButton {
+  padding: 8px 16px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.saveButton {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.editButton {
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #a3a3a3;
+  color: #fff;
+  margin-right: 10px;
+}
+
+.cancelButton {
+  background-color: #e85160;
+  color: #fff;
+}
+
+.editIcon {
+  font-size: 12px;
+  margin-right: 5px;
+}
