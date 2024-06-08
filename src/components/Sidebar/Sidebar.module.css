@@ -3,6 +3,7 @@
   background-color: var(--tertiary-color);
   padding: 20px;
   height: 100vh;
+  justify-content: space-between;
 }
 
 .sidebar p {
@@ -62,4 +63,8 @@
   background-color: #dbdbdb;
   font-size: 12px;
   margin-right: 10px;
+}
+
+.sidebar li:last-child {
+  border-bottom: none;
 }

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Card from "../../components/Cards/Card/Card";
+import UploadModal from "../../components/Modals/UploadModal/UploadModal";
 import styles from "./ProjectDetails.module.css";
 import YoutubeImg from "../../assets/Youtube.png";
 import SpotifyImg from "../../assets/Spotify.png";
@@ -15,9 +16,36 @@ const ProjectDetails = ({ user }) => {
     ? storedProjects.find((p) => p.name === projectName)
     : null;
 
+  const [showModal, setShowModal] = useState(false);
+  const [uploadData, setUploadData] = useState([]);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSaveUpload = (name, description) => {
+    const uploadItem = {
+      name,
+      description,
+      uploadDateTime: new Date().toLocaleString(),
+      status: "Done",
+    };
+    setUploadData([...uploadData, uploadItem]);
+  };
+
   if (!storedProjects || !project) {
     return <div>Project not found</div>;
   }
+
+  const handleDeleteItem = (index) => {
+    const updatedUploadData = [...uploadData];
+    updatedUploadData.splice(index, 1);
+    setUploadData(updatedUploadData);
+  };
 
   return (
     <div className={styles.container}>
@@ -29,16 +57,31 @@ const ProjectDetails = ({ user }) => {
         </nav>
         <h1 className={styles.title}>Upload</h1>
         <div className={styles.cardsContainer}>
-          <Card imgSrc={YoutubeImg} title="Upload Youtube Video" />
-          <Card imgSrc={SpotifyImg} title="Upload Spotify Podcast" />
-          <Card imgSrc={rssImg} title="Upload from RSS Feed" />
-          <Card imgSrc={circleImg} title="Upload Media or Text" />{" "}
+          <Card
+            imgSrc={YoutubeImg}
+            title="Upload Youtube Video"
+            onClick={handleOpenModal}
+          />
+          <Card
+            imgSrc={SpotifyImg}
+            title="Upload Spotify Podcast"
+            onClick={handleOpenModal}
+          />
+          <Card
+            imgSrc={rssImg}
+            title="Upload from RSS Feed"
+            onClick={handleOpenModal}
+          />
+          <Card
+            imgSrc={circleImg}
+            title="Upload Media or Text"
+            onClick={handleOpenModal}
+          />
         </div>
         <div className={styles.widgetBox}>
           <p>All files are processed! Your widget is ready to go!</p>
           <button className={styles.tryButton}>Try it out!</button>
         </div>
-
         <div className={styles.tableContainer}>
           <table className={styles.table}>
             <thead>
@@ -49,12 +92,31 @@ const ProjectDetails = ({ user }) => {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>{/* Insert table rows here */}</tbody>
+            <tbody>
+              {uploadData.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.name}</td>
+                  <td>{item.uploadDateTime}</td>
+                  <td>{item.status}</td>
+                  <td className={styles.actionButtons}>
+                    <button className={styles.editButton}>Edit</button>
+                    <button
+                      className={styles.deleteButton}
+                      onClick={() => handleDeleteItem(index)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
-
-        {/* <p>Created: {new Date(project.creationTime).toLocaleString()}</p> */}
+        <p>This {projectName} Created on {new Date(project.creationTime).toLocaleString()}</p>
       </main>
+      {showModal && (
+        <UploadModal onClose={handleCloseModal} onSave={handleSaveUpload} />
+      )}
     </div>
   );
 };

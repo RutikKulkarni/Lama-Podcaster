@@ -22,7 +22,10 @@ const Sidebar = () => {
         </li>
 
         <li>
-            <span className={styles.circleforsetting}><IoSettingsOutline className={styles.settingIcon} /></span> Setting
+          <span className={styles.circleforsetting}>
+            <IoSettingsOutline className={styles.settingIcon} />
+          </span>{" "}
+          Setting
         </li>
       </ul>
     </aside>

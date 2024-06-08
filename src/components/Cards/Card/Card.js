@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Card.module.css';
 
-const Card = ({ imgSrc, title }) => {
+const Card = ({ imgSrc, title, onClick }) => {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={onClick}>
       <div className={styles.square}>
         <img src={imgSrc} alt={title} className={styles.icon} />
       </div>
