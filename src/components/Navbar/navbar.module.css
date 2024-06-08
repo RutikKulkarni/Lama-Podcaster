@@ -88,7 +88,7 @@
 .login,
 .signup,
 .logout {
-  background: none;
+  background: none !important;
   border: none;
   color: inherit;
   font-size: 16px;

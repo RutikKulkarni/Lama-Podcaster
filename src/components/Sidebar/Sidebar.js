@@ -43,7 +43,11 @@ const Sidebar = () => {
         <li>
           <span className={styles.circle}>4</span> Pricing
         </li>
-        <li>
+        <li
+          className={
+            location.pathname.includes("/Setting") ? styles.active : ""
+          }
+        >
           <Link to="/Setting" className={styles.link}>
             <span className={styles.circleforsetting}>
               <IoSettingsOutline className={styles.settingIcon} />

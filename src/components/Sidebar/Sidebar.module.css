@@ -53,8 +53,11 @@
   font-size: 16px;
 }
 
+.sidebar li.active .settingIcon {
+  color: black;
+}
+
 .circleforsetting {
-  margin-top: 50px;
   display: inline-flex;
   align-items: center;
   justify-content: center;

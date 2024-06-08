@@ -94,8 +94,14 @@ const App = () => {
           }
         />
 
-        <Route path="/WeightConfiguration" element={<WeightConfiguration />} />
-        <Route path="/Setting" element={<Setting />} />
+        {loggedInUser && (
+          <Route
+            path="/WeightConfiguration"
+            element={<WeightConfiguration />}
+          />
+        )}
+
+        {loggedInUser && <Route path="/Setting" element={<Setting />} />}
       </Routes>
 
       {/* Modals */}
