@@ -11,7 +11,7 @@ import LoginModal from "./components/Modals/Login/Login";
 import SignupModal from "./components/Modals/Signup/Signup";
 import Projects from "./pages/Projects/Projects";
 import ProjectDetails from "./pages/ProjectDetails/ProjectDetails";
-import WeightConfiguration from "./pages/WeightConfiguration/WeightConfiguration";
+import WidgetConfigurations from "./pages/WidgetConfigurations/WidgetConfigurations";
 import Setting from "./pages/Setting/Setting";
 
 const App = () => {
@@ -103,8 +103,8 @@ const App = () => {
 
         {loggedInUser && (
           <Route
-            path="/WeightConfiguration"
-            element={<WeightConfiguration />}
+            path="/WidgetConfigurations"
+            element={<WidgetConfigurations />}
           />
         )}
         <Route path="/setting" element={<SettingRoute />} />

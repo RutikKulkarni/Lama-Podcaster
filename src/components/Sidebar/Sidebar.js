@@ -28,12 +28,12 @@ const Sidebar = () => {
         </li>
         <li
           className={
-            location.pathname.includes("/WeightConfiguration")
+            location.pathname.includes("/WidgetConfigurations")
               ? styles.active
               : ""
           }
         >
-          <Link to="/WeightConfiguration" className={styles.link}>
+          <Link to="/WidgetConfigurations" className={styles.link}>
             <span className={styles.circle}>2</span> Widget Configurations
           </Link>
         </li>

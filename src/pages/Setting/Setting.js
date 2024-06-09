@@ -4,7 +4,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import styles from "./Setting.module.css";
 import profileImage from "../../assets/user-avatar.png";
 
-const Setting = ({ user, loggedInUser }) => {
+const Setting = ({ user }) => {
   const { username, email } = user;
   const location = useLocation();
 
@@ -17,7 +17,7 @@ const Setting = ({ user, loggedInUser }) => {
         <div className={styles.breadcrumb}>
           <Link to="/">Home</Link> / {routePath}
         </div>
-        <h1 className={styles.title}>User Profile</h1>
+        <h1 className={styles.title}>Account Settings</h1>
         <div className={styles.cardsContainer}>
           <div className={styles.horizontalContainer}>
             <img
@@ -26,7 +26,7 @@ const Setting = ({ user, loggedInUser }) => {
               className={styles.profileImage}
             />
             <div className={styles.userInfo}>
-              <h1>{loggedInUser}</h1>
+              <h1>{username}</h1>
               <div className={styles.settingItem}>
                 <label htmlFor="username">Username:</label>
                 <span>{username}</span>

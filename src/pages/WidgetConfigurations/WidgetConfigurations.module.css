@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+  margin-right: 10px;
+  margin-left: 30px;
+  overflow-y: auto;
+}
+
+.breadcrumb {
+  margin-bottom: 40px;
+  margin-top: 20px;
+}
+
+.title {
+  margin-bottom: 40px;
+  color: var(--primary-color);
+}
+
+.tryButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
