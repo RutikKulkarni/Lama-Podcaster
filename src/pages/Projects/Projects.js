@@ -5,15 +5,28 @@ import { createProject } from "../../utility/createProject ";
 import ProjectCard from "../../components/Cards/ProjectCard/ProjectCard";
 import styles from "./Projects.module.css";
 import { MdAddCircle } from "react-icons/md";
+import axios from 'axios';
 
 const Projects = ({ user }) => {
   const [projects, setProjects] = useState([]);
   const [showCreateProjectModal, setShowCreateProjectModal] = useState(false);
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   const fetchedProjects = JSON.parse(localStorage.getItem(user)) || [];
+  //   setProjects(fetchedProjects);
+  // }, [user]);
+
   useEffect(() => {
-    const fetchedProjects = JSON.parse(localStorage.getItem(user)) || [];
-    setProjects(fetchedProjects);
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/projects/${user}`);
+        setProjects(response.data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+    fetchProjects();
   }, [user]);
 
   const handleCreateProject = (projectName) => {

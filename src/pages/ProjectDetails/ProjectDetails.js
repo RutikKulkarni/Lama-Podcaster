@@ -9,6 +9,7 @@ import YoutubeImg from "../../assets/Youtube.png";
 import SpotifyImg from "../../assets/Spotify.png";
 import rssImg from "../../assets/rss.png";
 import circleImg from "../../assets/Circle.png";
+import axios from 'axios';
 
 const ProjectDetails = ({ user }) => {
   const { projectName } = useParams();
@@ -37,14 +38,26 @@ const ProjectDetails = ({ user }) => {
     setShowModal(false);
   };
 
-  const handleSaveUpload = (name, description) => {
-    const uploadItem = {
-      name,
-      description,
-      uploadDateTime: new Date().toLocaleString(),
-      status: "Done",
-    };
-    setUploadData([...uploadData, uploadItem]);
+  // const handleSaveUpload = (name, description) => {
+  //   const uploadItem = {
+  //     name,
+  //     description,
+  //     uploadDateTime: new Date().toLocaleString(),
+  //     status: "Done",
+  //   };
+  //   setUploadData([...uploadData, uploadItem]);
+  // };
+
+  const handleSaveUpload = async (name, description) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/projects/${project._id}/upload`, {
+        name,
+        description
+      });
+      setUploadData(response.data.uploads);
+    } catch (error) {
+      console.error("Error saving upload:", error);
+    }
   };
 
   const handleDeleteItem = (index) => {
@@ -58,12 +71,25 @@ const ProjectDetails = ({ user }) => {
     setIsEditing(true);
   };
 
-  const handleSaveEdit = (newDescription) => {
-    const updatedUploadData = [...uploadData];
-    updatedUploadData[editIndex].description = newDescription;
-    setUploadData(updatedUploadData);
-    setIsEditing(false);
-    setEditIndex(null);
+  // const handleSaveEdit = (newDescription) => {
+  //   const updatedUploadData = [...uploadData];
+  //   updatedUploadData[editIndex].description = newDescription;
+  //   setUploadData(updatedUploadData);
+  //   setIsEditing(false);
+  //   setEditIndex(null);
+  // };
+
+  const handleSaveEdit = async (newDescription) => {
+    try {
+      const response = await axios.put(`http://localhost:5000/projects/${project._id}/upload/${uploadData[editIndex]._id}/edit`, {
+        newDescription
+      });
+      setUploadData(response.data.uploads);
+      setIsEditing(false);
+      setEditIndex(null);
+    } catch (error) {
+      console.error("Error saving edit:", error);
+    }
   };
 
   if (!storedProjects.length || !project) {

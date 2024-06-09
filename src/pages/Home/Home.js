@@ -6,6 +6,7 @@ import { MdAddCircle } from "react-icons/md";
 import CreateProject from "../../components/Modals/CreateProject/CreateProject";
 import { createProject } from "../../utility/createProject "; 
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const Home = ({ user }) => {
   const [showMessage, setShowMessage] = useState(false);
@@ -24,11 +25,24 @@ const Home = ({ user }) => {
     setShowCreateProjectModal(false);
   };
 
-  const handleCreateProject = (projectName) => {
-    createProject(user, projectName);
-    navigate("/projects");
-    handleCloseModal();
+  // const handleCreateProject = (projectName) => {
+  //   createProject(user, projectName);
+  //   navigate("/projects");
+  //   handleCloseModal();
+  // };
+
+  const handleCreateProject = async (projectName) => {
+    try {
+      const response = await axios.post('http://localhost:5000/projects', {
+        userId: user,
+        projectName
+      });
+      navigate("/projects");
+    } catch (error) {
+      console.error("Error creating project:", error);
+    }
   };
+  
 
   return (
     <div className={styles.container}>
