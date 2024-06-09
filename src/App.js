@@ -71,6 +71,14 @@ const App = () => {
     return user ? element : <Navigate to="/" replace />;
   };
 
+  const SettingRoute = () => {
+    return loggedInUser ? (
+      <Setting user={loggedInUser} />
+    ) : (
+      <Navigate to="/" replace />
+    );
+  };
+
   return (
     <Router>
       <Navbar
@@ -80,7 +88,6 @@ const App = () => {
         handleLogout={handleLogout}
       />
 
-      {/* Routes */}
       <Routes>
         <Route path="/" element={<Home user={loggedInUser} />} />
         <Route
@@ -100,11 +107,9 @@ const App = () => {
             element={<WeightConfiguration />}
           />
         )}
-
-        {loggedInUser && <Route path="/Setting" element={<Setting />} />}
+        <Route path="/setting" element={<SettingRoute />} />
       </Routes>
 
-      {/* Modals */}
       {showLoginModal && (
         <LoginModal onClose={closeLoginModal} onLogin={handleLogin} />
       )}

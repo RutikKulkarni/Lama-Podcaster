@@ -40,6 +40,9 @@ function Navbar({
             <button className={styles.logout} onClick={handleLogout}>
               <FiLogOut className={styles.logoutIcon} />
             </button>
+            <Link to="/Setting">
+              <IoSettingsOutline className={styles.settingIcon} />
+            </Link>
           </>
         )}
         {!loggedInUser && (
@@ -54,10 +57,6 @@ function Navbar({
           </>
         )}
         <div className={styles.homeIcons}>
-          <Link to="/Setting">
-              <IoSettingsOutline className={styles.settingIcon} />
-          </Link>
-
           <IoMdNotificationsOutline className={styles.notificationIcon} />
         </div>
       </div>

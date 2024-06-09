@@ -4,7 +4,7 @@ import { formatDistanceToNow } from "date-fns";
 
 const ProjectCard = ({
   projectName = "",
-  episodeName = "Episode 1",
+  episodeName = "Episodes",
   creationTime,
 }) => {
   const getInitials = (name) => {
