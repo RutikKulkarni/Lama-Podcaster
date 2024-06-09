@@ -21,11 +21,37 @@
   color: var(--primary-color);
 }
 
-.tryButton {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
+.optionsMenu {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.optionsMenu p {
+  margin-right: 20px;
   cursor: pointer;
+  color: var(--primary-color);
   font-size: 16px;
-  font-weight: 500;
+}
+
+.optionsMenu p.active {
+  font-weight: bold;
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.options {
+  margin-bottom: 20px;
+}
+
+.options label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.options input[type="text"] {
+  width: 80%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
