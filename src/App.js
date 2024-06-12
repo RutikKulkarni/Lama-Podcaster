@@ -20,7 +20,7 @@ const App = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem("loggedInUser");
+    const user = localStorage.getItem("loggedInUser")?.username;
     if (user) {
       setLoggedInUser(user);
     }
@@ -42,9 +42,10 @@ const App = () => {
     setShowSignupModal(false);
   };
 
-  const handleLogin = (username) => {
+  const handleLogin = (username, email) => {
     setLoggedInUser(username);
-    localStorage.setItem("loggedInUser", username);
+    let userDetails = { username, email };
+    localStorage.setItem("loggedInUser", JSON.stringify(userDetails));
     const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
     localStorage.setItem("expirationTime", expirationTime);
   };
@@ -72,11 +73,7 @@ const App = () => {
   };
 
   const SettingRoute = () => {
-    return loggedInUser ? (
-      <Setting user={loggedInUser} />
-    ) : (
-      <Navigate to="/" replace />
-    );
+    return loggedInUser ? <Setting /> : <Navigate to="/" replace />;
   };
 
   return (

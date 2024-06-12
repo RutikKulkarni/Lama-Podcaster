@@ -17,7 +17,7 @@ function LoginModal({ onClose, onLogin }) {
     const user = loginUser(email, password);
 
     if (user) {
-      onLogin(user.username);
+      onLogin(user.username, email);
       onClose();
     } else {
       setErrorMessage("Invalid email or password.");

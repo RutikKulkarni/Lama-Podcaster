@@ -5,7 +5,7 @@ import { createProject } from "../../utility/createProject ";
 import ProjectCard from "../../components/Cards/ProjectCard/ProjectCard";
 import styles from "./Projects.module.css";
 import { MdAddCircle } from "react-icons/md";
-import axios from 'axios';
+import axios from "axios";
 
 const Projects = ({ user }) => {
   const [projects, setProjects] = useState([]);
@@ -20,7 +20,9 @@ const Projects = ({ user }) => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/projects/${user}`);
+        const response = await axios.get(
+          `http://localhost:5000/projects/${user}`
+        );
         setProjects(response.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -29,9 +31,10 @@ const Projects = ({ user }) => {
     fetchProjects();
   }, [user]);
 
-  const handleCreateProject = (projectName) => {
-    const updatedProjects = createProject(user, projectName);
-    setProjects(updatedProjects);
+  const handleCreateProject = async (projectName) => {
+    const updatedProjects = await createProject(user, projectName);
+    setProjects((prev) => [...prev, updatedProjects]);
+
     setShowCreateProjectModal(false);
   };
 
@@ -50,33 +53,34 @@ const Projects = ({ user }) => {
   return (
     <div className={styles.projectsContainer}>
       <div className={styles.headerContainer}>
-        <h1>Projects</h1>
+        <h1> Projects </h1>{" "}
         <button className={styles.button} onClick={openCreateProjectModal}>
-          <MdAddCircle className={styles.plusIcon} /> Create New Project
-        </button>
-      </div>
+          <MdAddCircle className={styles.plusIcon} /> Create New Project{" "}
+        </button>{" "}
+      </div>{" "}
       {projects.length === 0 ? (
-        <p>No projects available. Create a new project to get started!</p>
+        <p> No projects available.Create a new project to get started! </p>
       ) : (
         <div className={styles.projectsGrid}>
-          {projects.map((project, index) => (
+          {" "}
+          {projects?.map((project, index) => (
             <div key={index} onClick={() => handleProjectClick(project.name)}>
               <ProjectCard
                 projectName={project.name}
                 episodeName={project.episodeName}
                 creationTime={project.creationTime}
-              />
+              />{" "}
             </div>
-          ))}
+          ))}{" "}
         </div>
-      )}
+      )}{" "}
       {showCreateProjectModal && (
         <CreateProject
           onClose={closeCreateProjectModal}
           user={user}
           onCreate={handleCreateProject}
         />
-      )}
+      )}{" "}
     </div>
   );
 };

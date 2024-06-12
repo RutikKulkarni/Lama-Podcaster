@@ -9,26 +9,51 @@ import YoutubeImg from "../../assets/Youtube.png";
 import SpotifyImg from "../../assets/Spotify.png";
 import rssImg from "../../assets/rss.png";
 import circleImg from "../../assets/Circle.png";
-import axios from 'axios';
+import axios from "axios";
 
 const ProjectDetails = ({ user }) => {
   const { projectName } = useParams();
-  const storedProjects = JSON.parse(localStorage.getItem(user)) || [];
-  const project = storedProjects.find((p) => p.name === projectName) || null;
-
+  const [storedProjects, setStoredProjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [uploadData, setUploadData] = useState(project ? project.uploads || [] : []);
+  const [uploadData, setUploadData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editIndex, setEditIndex] = useState(null);
 
-  useEffect(() => {
-    if (project) {
-      const updatedProjects = storedProjects.map((p) =>
-        p.name === projectName ? { ...p, uploads: uploadData } : p
+  const fetchUserProjects = async (username) => {
+    try {
+      let response = await axios.get(
+        `http://localhost:5000/projects/${username}`
       );
-      localStorage.setItem(user, JSON.stringify(updatedProjects));
+      setStoredProjects(response.data);
+    } catch (err) {
+      console.error("Error fetching projects:", err.message);
     }
-  }, [uploadData]);
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchUserProjects(user);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const project = storedProjects.find((p) => p.name === projectName);
+    if (project) {
+      setUploadData(project.uploads || []);
+    }
+  }, [storedProjects, projectName]);
+
+  useEffect(() => {
+    if (storedProjects.length && projectName) {
+      const project = storedProjects.find((p) => p.name === projectName);
+      if (project) {
+        const updatedProjects = storedProjects.map((p) =>
+          p.name === projectName ? { ...p, uploads: uploadData } : p
+        );
+        localStorage.setItem(user, JSON.stringify(updatedProjects));
+      }
+    }
+  }, [uploadData, storedProjects, projectName, user]);
 
   const handleOpenModal = () => {
     setShowModal(true);
@@ -38,22 +63,12 @@ const ProjectDetails = ({ user }) => {
     setShowModal(false);
   };
 
-  // const handleSaveUpload = (name, description) => {
-  //   const uploadItem = {
-  //     name,
-  //     description,
-  //     uploadDateTime: new Date().toLocaleString(),
-  //     status: "Done",
-  //   };
-  //   setUploadData([...uploadData, uploadItem]);
-  // };
-
   const handleSaveUpload = async (name, description) => {
     try {
-      const response = await axios.put(`http://localhost:5000/projects/${project._id}/upload`, {
-        name,
-        description
-      });
+      const response = await axios.put(
+        `http://localhost:5000/projects/${project._id}/upload`,
+        { name, description }
+      );
       setUploadData(response.data.uploads);
     } catch (error) {
       console.error("Error saving upload:", error);
@@ -71,19 +86,12 @@ const ProjectDetails = ({ user }) => {
     setIsEditing(true);
   };
 
-  // const handleSaveEdit = (newDescription) => {
-  //   const updatedUploadData = [...uploadData];
-  //   updatedUploadData[editIndex].description = newDescription;
-  //   setUploadData(updatedUploadData);
-  //   setIsEditing(false);
-  //   setEditIndex(null);
-  // };
-
   const handleSaveEdit = async (newDescription) => {
     try {
-      const response = await axios.put(`http://localhost:5000/projects/${project._id}/upload/${uploadData[editIndex]._id}/edit`, {
-        newDescription
-      });
+      const response = await axios.put(
+        `http://localhost:5000/projects/${project._id}/upload/${uploadData[editIndex]._id}/edit`,
+        { newDescription }
+      );
       setUploadData(response.data.uploads);
       setIsEditing(false);
       setEditIndex(null);
@@ -92,16 +100,22 @@ const ProjectDetails = ({ user }) => {
     }
   };
 
-  if (!storedProjects.length || !project) {
+  if (
+    !storedProjects.length ||
+    !storedProjects.find((p) => p.name === projectName)
+  ) {
     return <div>Project not found</div>;
   }
+
+  const project = storedProjects.find((p) => p.name === projectName);
 
   return (
     <div className={styles.container}>
       <Sidebar />
       <main className={styles.mainContent}>
         <nav className={styles.breadcrumb}>
-          <Link to="/">Home</Link> / <Link to="/projects">Projects</Link> / {projectName}
+          <Link to="/">Home</Link> / <Link to="/projects">Projects</Link> /{" "}
+          {projectName}
         </nav>
         {isEditing ? (
           <EditDescription
@@ -173,7 +187,10 @@ const ProjectDetails = ({ user }) => {
                 </tbody>
               </table>
             </div>
-            <p>This {projectName} Created on {new Date(project.creationTime).toLocaleString()}</p>
+            <p>
+              This {projectName} was created on{" "}
+              {new Date(project.creationTime).toLocaleString()}
+            </p>
           </>
         )}
       </main>
