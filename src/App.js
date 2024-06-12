@@ -20,9 +20,9 @@ const App = () => {
   const [showSignupModal, setShowSignupModal] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem("loggedInUser")?.username;
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
     if (user) {
-      setLoggedInUser(user);
+      setLoggedInUser(user.username);
     }
   }, []);
 
@@ -44,7 +44,7 @@ const App = () => {
 
   const handleLogin = (username, email) => {
     setLoggedInUser(username);
-    let userDetails = { username, email };
+    const userDetails = { username, email };
     localStorage.setItem("loggedInUser", JSON.stringify(userDetails));
     const expirationTime = new Date().getTime() + 24 * 60 * 60 * 1000;
     localStorage.setItem("expirationTime", expirationTime);
@@ -63,12 +63,13 @@ const App = () => {
         handleLogout();
       }
     };
+    checkExpiration();
     const interval = setInterval(checkExpiration, 1000);
     return () => clearInterval(interval);
   }, []);
 
   const ProjectsRoute = ({ element }) => {
-    const user = localStorage.getItem("loggedInUser");
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
     return user ? element : <Navigate to="/" replace />;
   };
 
@@ -97,7 +98,6 @@ const App = () => {
             <ProjectsRoute element={<ProjectDetails user={loggedInUser} />} />
           }
         />
-
         {loggedInUser && (
           <Route
             path="/WidgetConfigurations"
