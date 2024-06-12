@@ -9,7 +9,8 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-const uri = "mongodb+srv://rutikkulkarni2001:User123@cluster0.ipkxmfk.mongodb.net/Cluster0?retryWrites=true&w=majority";
+const uri =
+  "mongodb+srv://rutikkulkarni2001:User123@cluster0.ipkxmfk.mongodb.net/Cluster0?retryWrites=true&w=majority";
 mongoose
   .connect(uri)
   .then(() => console.log("MongoDB connected"))
@@ -84,10 +85,24 @@ app.delete("/projects/:projectId/upload/:uploadId", async (req, res) => {
   const { projectId, uploadId } = req.params;
   try {
     const project = await Project.findById(projectId);
-    project.uploads.id(uploadId).remove();
+    if (!project) {
+      console.log("Project not found");
+      return res.status(404).json({ error: "Project not found" });
+    }
+    console.log("Found project:", project);
+    const uploadIndex = project.uploads.findIndex(
+      (upload) => upload._id.toString() === uploadId
+    );
+    if (uploadIndex === -1) {
+      console.log("Upload item not found");
+      return res.status(404).json({ error: "Upload item not found" });
+    }
+    project.uploads.splice(uploadIndex, 1);
     const updatedProject = await project.save();
+    console.log("Upload item removed successfully");
     res.json(updatedProject);
   } catch (err) {
+    console.error("Error while deleting upload item:", err.message);
     res.status(400).json({ error: err.message });
   }
 });

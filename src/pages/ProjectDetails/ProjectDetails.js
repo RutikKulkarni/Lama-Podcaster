@@ -75,10 +75,32 @@ const ProjectDetails = ({ user }) => {
     }
   };
 
-  const handleDeleteItem = (index) => {
+  // const handleDeleteItem = (index) => {
+  //   const updatedUploadData = [...uploadData];
+  //   updatedUploadData.splice(index, 1);
+  //   setUploadData(updatedUploadData);
+  // };
+  const handleDeleteItem = async (index) => {
     const updatedUploadData = [...uploadData];
-    updatedUploadData.splice(index, 1);
-    setUploadData(updatedUploadData);
+    const uploadItem = updatedUploadData[index];
+    try {
+      await axios.delete(
+        `https://lama-podcaster.onrender.com/projects/${project._id}/upload/${uploadItem._id}`,
+        { headers: { "Content-Type": "application/json" } }
+      );
+      updatedUploadData.splice(index, 1);
+      setUploadData(updatedUploadData);
+    } catch (error) {
+      if (error.response) {
+        console.error("Error response data:", error.response.data);
+        console.error("Error response status:", error.response.status);
+        console.error("Error response headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Error request:", error.request);
+      } else {
+        console.error("Error message:", error.message);
+      }
+    }
   };
 
   const handleEditItem = (index) => {
