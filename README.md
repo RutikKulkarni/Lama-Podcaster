@@ -1,3 +1,5 @@
+Sure, here is your updated README file with the additional URLs:
+
 # Lama Podcaster
 
 Lama Podcaster is a web application designed to simplify podcast management tasks. It provides users with features to create, edit, and manage podcast projects, upload content, configure widgets, and handle user authentication.
@@ -58,6 +60,7 @@ Lama Podcaster is a web application designed to simplify podcast management task
 5. **Setting Page**:
    - Provides settings for user preferences and account management.
 
-## Live URL
+## URLs
 
-The live version of Lama Podcaster can be accessed [here](https://lama-podcaster.vercel.app/).
+- **Live URL**: [https://lama-podcaster.vercel.app/](https://lama-podcaster.vercel.app/)
+- **Backend URL**: [https://lama-podcaster.onrender.com](https://lama-podcaster.onrender.com)
