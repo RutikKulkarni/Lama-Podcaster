@@ -109,6 +109,20 @@ const ProjectDetails = ({ user }) => {
 
   const project = storedProjects.find((p) => p.name === projectName);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    };
+    return date.toLocaleString("en-GB", options);
+  };
+
   return (
     <div className={styles.container}>
       <Sidebar />
@@ -166,7 +180,7 @@ const ProjectDetails = ({ user }) => {
                   {uploadData.map((item, index) => (
                     <tr key={index}>
                       <td>{item.name}</td>
-                      <td>{item.uploadDateTime}</td>
+                      <td>{formatDate(item.uploadDateTime)}</td>
                       <td>{item.status}</td>
                       <td className={styles.actionButtons}>
                         <button
