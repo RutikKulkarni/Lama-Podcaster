@@ -15,7 +15,7 @@ import axios from 'axios';
 
 export const createProject = async (user, projectName) => {
   try {
-    const response = await axios.post('http://localhost:5000/projects', {
+    const response = await axios.post('https://lama-podcaster.onrender.com/projects', {
       userId: user,
       projectName,
     });

@@ -21,7 +21,7 @@ const Projects = ({ user }) => {
     const fetchProjects = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/projects/${user}`
+          `https://lama-podcaster.onrender.com/projects/${user}`
         );
         setProjects(response.data);
       } catch (error) {

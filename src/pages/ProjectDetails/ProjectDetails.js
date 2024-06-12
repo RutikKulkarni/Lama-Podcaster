@@ -22,7 +22,7 @@ const ProjectDetails = ({ user }) => {
   const fetchUserProjects = async (username) => {
     try {
       let response = await axios.get(
-        `http://localhost:5000/projects/${username}`
+        `https://lama-podcaster.onrender.com/projects/${username}`
       );
       setStoredProjects(response.data);
     } catch (err) {
@@ -66,7 +66,7 @@ const ProjectDetails = ({ user }) => {
   const handleSaveUpload = async (name, description) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/projects/${project._id}/upload`,
+        `https://lama-podcaster.onrender.com/projects/${project._id}/upload`,
         { name, description }
       );
       setUploadData(response.data.uploads);
@@ -89,7 +89,7 @@ const ProjectDetails = ({ user }) => {
   const handleSaveEdit = async (newDescription) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/projects/${project._id}/upload/${uploadData[editIndex]._id}/edit`,
+        `https://lama-podcaster.onrender.com/projects/${project._id}/upload/${uploadData[editIndex]._id}/edit`,
         { newDescription }
       );
       setUploadData(response.data.uploads);
