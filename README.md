@@ -1,5 +1,3 @@
-Sure, here is your updated README file with the additional URLs:
-
 # Lama Podcaster
 
 Lama Podcaster is a web application designed to simplify podcast management tasks. It provides users with features to create, edit, and manage podcast projects, upload content, configure widgets, and handle user authentication.
